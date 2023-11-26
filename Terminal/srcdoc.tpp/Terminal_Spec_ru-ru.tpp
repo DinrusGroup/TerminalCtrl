@@ -31,35 +31,35 @@ Yılmaz]&]
 [s5; This document is in progress (being written..).&]
 [s22;%- Table of contents&]
 [s0;%- &]
-[s0; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_en`-us`#SupportedEmulationLevels^ 1
+[s0; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#SupportedEmulationLevels^ 1
  Supported Emulation Levels]&]
-[s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_en`-us`#Terminal`:`:IOModes^ 2
+[s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#Terminal`:`:IOModes^ 2
  Supported I/O Modes and Parser Capabilities]&]
 [s0; 3 Supported Legacy Charset Sequences&]
 [s0; 4 Supported Keyboard Sequences&]
-[s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_en`-us`#TerminalCTL^ 5 
+[s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#TerminalCTL^ 5 
 Supported Control Bytes]&]
-[s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_en`-us`#TerminalModes^ 6 
+[s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#TerminalModes^ 6 
 Supported Terminal Modes]&]
-[s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_en`-us`#TerminalESC^ 7 
+[s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#TerminalESC^ 7 
 Supported Escape Sequences]&]
-[s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_en`-us`#TerminalCSI^ 8 
+[s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#TerminalCSI^ 8 
 Supported Command Sequences]&]
-[s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_en`-us`#TerminalDCS^ 9 
+[s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#TerminalDCS^ 9 
 Supported Device Control Strings]&]
-[s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_en`-us`#TerminalOSC^ 10 
+[s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#TerminalOSC^ 10 
 Supported Operating System Commands]&]
-[s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_en`-us`#TerminalSGR^ 11 
+[s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#TerminalSGR^ 11 
 Supported Graphics Rendition Opcodes]&]
-[s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_en`-us`#TerminalExtendedColorSequences^ 1
+[s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#TerminalExtendedColorSequences^ 1
 2 Supported Extended Color Sequences]&]
-[s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_en`-us`#TextColorFormats^ 1
+[s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#ColorTextSpecifications^ 1
 3 Supported Color Text Specifications]&]
-[s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_en`-us`#ExtenedInlineImageSequences^ 1
+[s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#ExtenedInlineImageSequences^ 1
 4 Supported Extended Inline Images Sequences]&]
-[s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_en`-us`#WindowActionAndReport^ 1
+[s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#WindowActionAndReport^ 1
 5 Supported Window Report and Action Sequences]&]
-[s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_en`-us`#TerminalOtherExt^ 1
+[s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#TerminalOtherExt^ 1
 6 Other Supported Extensions]&]
 [s0; 15. Further Reading&]
 [s0; 16. Acknowledgements&]
@@ -1376,14 +1376,14 @@ Sequences]]
 ::-3 [s19;r442;%- &]
 [s6;#r442;i150;O0;%- [/C 38 ]designates the pen.&]
 [s6;#r442;i150;O0;%- [/C 48 ]designates the paper.&]
-[s6;#r442;i150;O0;%- Since [%% TerminalCtrl] is a true color virtual 
+[s6;#r442;i150;O0;%- Since [%RU-RU TerminalCtrl] is a true color virtual 
 terminal emulator, there are no restrictions on its color palette. 
 It can use a color palette ranging from 2 to 16 million colors.&]
 [s6;#r442;i150;O0;%- CMY and CMYK planes are projected onto RGB plane.&]
-[s6;#r442;i150;O0;%- [%% TerminalCtrl] does not keep a static palette 
+[s6;#r442;i150;O0;%- [%RU-RU TerminalCtrl] does not keep a static palette 
 for indexed color, or 256 colors mode, if you will. It calculates 
 the the 6x6x6 cube from the given index.&]
-[s6;#r442;i150;O0;%- Color space identifiers are ignored by [%% TerminalCtrl].&]
+[s6;#r442;i150;O0;%- Color space identifiers are ignored by [%RU-RU TerminalCtrl].&]
 [s6;#r442;i150;O0;%- Transparent colors are not implemented (TODO).&]
 [s19;r442;%- ]
 ::-2 [s0;%- ]
@@ -1498,13 +1498,13 @@ Sequences]]
 are 1 (scroll) or 0 (no scroll).&]
 [s6;r292;i150;O0;%- Image data must be Base64 encoded.&]
 [s6;#r292;i150;O0;%- The wire protocol reasonably separates the sequences 
-for raw RGB, JPG and PNG image data. In practice, however, [%% TerminalCtrl 
+for raw RGB, JPG and PNG image data. In practice, however, [%RU-RU TerminalCtrl 
 ]ignores this distinction, since it uses the StreamRaster interface 
 (the raster image decoder factory) for decoding images. Hence, 
 it can display any raster image via jexer`'s pre`-defined sequences, 
 if the format of the image in question is supported by the Upp`::StreamRaster.&]
 [s6;#r292;i150;O0;%- Jexer inline images protocol is the [/ recommended] 
-inline images protocol of choice for [%% TerminalCtrl].&]
+inline images protocol of choice for [%RU-RU TerminalCtrl].&]
 [s19;r292;%- &]
 [s6;#r292;%- For more information on the design decisions and implementation 
 notes of the original Jexer wire protocol, see [^https`:`/`/gitlab`.com`/klamonte`/jexer`/`-`/wikis`/jexer`-images^ J
@@ -1532,7 +1532,7 @@ exer wiki].&]
 :: [s0;%- ]
 ::-3 [s19;%- &]
 [s0;#l288;r36;%- -|iTerm2`'s inline images feature is a part of its 
-file download and display protocol. [%% TerminalCtrl] currenty 
+file download and display protocol. [%RU-RU TerminalCtrl] currenty 
 supports only the inline image display command of this protocol 
 and some of its relevant arguments. These arguments should be 
 in [C key`=value] pairs, delimited with semicolons.&]
@@ -1732,12 +1732,12 @@ ctrl.&]
 :: [s0;%- ]
 ::-2 [s19;%- &]
 [s0;l288;i150;b17;a17;O0;%- [C The clipboard ]parameter can be empty 
-or `"s0`". Currently, [%% TerminalCtrl] omits this parameter.&]
-[s6;i150;O0;%- When the [C data] is a `"?`", [%% TerminalCtrl] will reply 
-to the host with the selection/clipboard data encoded using the 
-same protocol.&]
+or `"s0`". Currently, [%RU-RU TerminalCtrl] omits this parameter.&]
+[s6;i150;O0;%- When the [C data] is a `"?`", [%RU-RU TerminalCtrl] will 
+reply to the host with the selection/clipboard data encoded using 
+the same protocol.&]
 [s6;i150;O0;%- When the [C data] is [/ neither a base64 string nor a 
-`"?`"], [%% TerminalCtrl] will clear the selection/clipboard.&]
+`"?`"], [%RU-RU TerminalCtrl] will clear the selection/clipboard.&]
 [s19;%- ]
 ::-1 [s0;%- ]
 :: [s0;%- ]}}&]
