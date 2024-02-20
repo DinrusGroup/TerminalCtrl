@@ -436,7 +436,7 @@ Value ConvertHashColorSpec::Scan(const Value& text) const
 			break;
 		}
 	}
-	return Upp::ErrorValue(t_("Bad hash color text format"));
+	return Upp::ErrorValue(t_("Неверный формат хэша цвета текста"));
 }
 
 Value ConvertHashColorSpec::Format(const Value& q) const
@@ -445,7 +445,7 @@ Value ConvertHashColorSpec::Format(const Value& q) const
 		const Color& c = (Color&) q;
 		return Upp::Format("#%02x%02x%02x", c.GetR(), c.GetG(), c.GetB());
 	}
-	return Upp::ErrorValue(t_("Bad color value"));
+	return Upp::ErrorValue(t_("Неверное значение цвета"));
 }
 
 int ConvertRgbColorSpec::Filter(int chr) const
@@ -487,7 +487,7 @@ Value ConvertRgbColorSpec::Scan(const Value& text) const
 		}
 	}
 	
-	return Upp::ErrorValue(t_("Bad rgb/a color text format"));
+	return Upp::ErrorValue(t_("Неверный формат цвета текста rgb/a"));
 }
 
 Value ConvertRgbColorSpec::Format(const Value& q) const
@@ -496,7 +496,7 @@ Value ConvertRgbColorSpec::Format(const Value& q) const
 		const Color& c = (Color&) q;
 		return Upp::Format("rgb:%04x/%04x/%04x", c.GetR() * 257, c.GetG() * 257, c.GetB() * 257);
 	}
-	return Upp::ErrorValue(t_("Bad color value"));
+	return Upp::ErrorValue(t_("Неверное значение цвета"));
 }
 
 int ConvertCmykColorSpec::Filter(int chr) const
@@ -526,7 +526,7 @@ Value ConvertCmykColorSpec::Scan(const Value& text) const
 		&& !IsNull(k))
 			return CmykColorf(c, m, y, k);
 	}
-	return Upp::ErrorValue(t_("Bad cmy/k color text format"));
+	return Upp::ErrorValue(t_("Неверный формат цвета текста cmy/k"));
 }
 
 Value ConvertCmykColorSpec::Format(const Value& q) const
@@ -537,7 +537,7 @@ Value ConvertCmykColorSpec::Format(const Value& q) const
 		RGBtoCMYK(r.GetR() / 255.0, r.GetG() / 255.0, r.GetB() / 255.0, c, m, y, k);
 		return Upp::Format("cmyk:%f/%f/%f/%f", c, m, y, k);
 	}
-	return Upp::ErrorValue(t_("Bad color value"));
+	return Upp::ErrorValue(t_("Неверное значение цвета"));
 }
 
 Value ConvertColor::Scan(const Value& text) const

@@ -42,11 +42,11 @@ TerminalCtrl::TerminalCtrl()
 	History();
 	ResetColors();
 	HideScrollBar();
-	WhenBar = [=](Bar& menu) { StdBar(menu); };
-	sb.WhenScroll = [=]() { Scroll(); };
-	caret.WhenAction = [=]() { ScheduleRefresh(); };
-	dpage.WhenUpdate = [=]() { ScheduleRefresh(); };
-	apage.WhenUpdate = [=]() { ScheduleRefresh(); };
+	WhenBar = [=, this](Bar& menu) { StdBar(menu); };
+	sb.WhenScroll = [=, this]() { Scroll(); };
+	caret.WhenAction = [=, this]() { ScheduleRefresh(); };
+	dpage.WhenUpdate = [=, this]() { ScheduleRefresh(); };
+	apage.WhenUpdate = [=, this]() { ScheduleRefresh(); };
 }
 
 TerminalCtrl::~TerminalCtrl()
@@ -171,13 +171,13 @@ void TerminalCtrl::SyncSize(bool notify)
 	Size newsize = GetPageSize();
 	resizing = page->GetSize() != newsize;
 
-	auto OnSizeHint	= [=]
+	auto OnSizeHint	= [=, this]
 	{
 		RefreshSizeHint();
 		hinting = false;
 	};
 	
-	auto OnResize = [=]
+	auto OnResize = [=, this]
 	{
 		resizing = false;
 		WhenResize();
@@ -214,7 +214,7 @@ void TerminalCtrl::ScheduleRefresh()
 	else
 	if((!lazyresize || !resizing)
 	&& !ExistsTimeCallback(TIMEID_REFRESH))  // Don't cancel a pending refresh.
-		SetTimeCallback(16, [=] { SyncSb(); RefreshDisplay(); }, TIMEID_REFRESH);
+		SetTimeCallback(16, [=, this] { SyncSb(); RefreshDisplay(); }, TIMEID_REFRESH);
 }
 
 Tuple<String, Size> TerminalCtrl::GetSizeHint()
@@ -312,7 +312,7 @@ void TerminalCtrl::Blink(bool b)
 {
 	bool bb = ExistsTimeCallback(TIMEID_BLINK);
 	if(blinkingtext && b && !bb)
-		SetTimeCallback(-blinkinterval, [=]{ blinking ^= 1; RefreshDisplay(); }, TIMEID_BLINK);
+		SetTimeCallback(-blinkinterval, [=, this]{ blinking ^= 1; RefreshDisplay(); }, TIMEID_BLINK);
 	else
 	if(!blinkingtext || !b) {
 		blinking = false;
@@ -897,9 +897,9 @@ void TerminalCtrl::HighlightHyperlink(Point pt)
 
 void TerminalCtrl::StdBar(Bar& menu)
 {
-	menu.Sub(t_("Options"), [=](Bar& menu) { OptionsBar(menu); });
+	menu.Sub(t_("Опции"), [=, this](Bar& menu) { OptionsBar(menu); });
 	menu.Separator();
-	menu.Add(t_("Read only"), [=] { SetEditable(IsReadOnly()); })
+	menu.Add(t_("Только Чтение"), [=, this] { SetEditable(IsReadOnly()); })
 		.Key(K_SHIFT_CTRL_L)
 		.Check(IsReadOnly());
 	if(IsMouseOverImage()) {
@@ -919,12 +919,12 @@ void TerminalCtrl::StdBar(Bar& menu)
 
 void TerminalCtrl::EditBar(Bar& menu)
 {
-	menu.Add(IsSelection(), t_("Copy"), CtrlImg::copy(),  [=] { Copy();  })
+	menu.Add(IsSelection(), t_("Копировать"), CtrlImg::copy(),  [=, this] { Copy();  })
 		.Key(K_SHIFT_CTRL_C);
-	menu.Add(IsEditable(), t_("Paste"), CtrlImg::paste(), [=] { Paste(); })
+	menu.Add(IsEditable(), t_("Вставить"), CtrlImg::paste(), [=, this] { Paste(); })
 		.Key(K_SHIFT_CTRL_V);
 	menu.Separator();
-	menu.Add(t_("Select all"), CtrlImg::select_all(), [=] { SelectAll(); })
+	menu.Add(t_("Выделить Все"), CtrlImg::select_all(), [=, this] { SelectAll(); })
 		.Key(K_SHIFT_CTRL_A);
 }
 
@@ -934,9 +934,9 @@ void TerminalCtrl::LinksBar(Bar& menu)
 	if(IsNull(uri))
 		return;
 
-	menu.Add(t_("Copy link to clipboard"), CtrlImg::copy(), [=] { Copy(uri.ToWString()); })
+	menu.Add(t_("Копировать ссылку в буфер обмена"), CtrlImg::copy(), [=, this] { Copy(uri.ToWString()); })
 		.Key(K_SHIFT_CTRL_H);
-	menu.Add(t_("Open link..."), CtrlImg::open(), [=] { WhenLink(uri); })
+	menu.Add(t_("Открыть ссылку..."), CtrlImg::open(), [=, this] { WhenLink(uri); })
 		.Key(K_SHIFT_CTRL_O);
 }
 
@@ -944,14 +944,14 @@ void TerminalCtrl::ImagesBar(Bar& menu)
 {
 	Point pt = mousepos;
 
-	menu.Add(t_("Copy image to clipboard"), CtrlImg::copy(), [=]
+	menu.Add(t_("Копировать рисунок в буфер обмена"), CtrlImg::copy(), [=, this]
 		{
 			Image img = GetInlineImage(pt, true);
 			if(!IsNull(img))
 				AppendClipboardImage(img);
 		})
 		.Key(K_SHIFT_CTRL_H);
-	menu.Add(t_("Open image..."), CtrlImg::open(), [=]
+	menu.Add(t_("Открыть рисунок..."), CtrlImg::open(), [=, this]
 		{
 			Image img = GetInlineImage(pt, true);
 			if(!IsNull(img))
@@ -964,87 +964,87 @@ void TerminalCtrl::OptionsBar(Bar& menu)
 {
 	bool inlineimages = jexerimages || sixelimages || iterm2images;
 
-	menu.Sub(t_("Cursor style"), [=](Bar& menu)
+	menu.Sub(t_("Стиль курсора"), [=, this](Bar& menu)
 		{
 			byte cstyle   = caret.GetStyle();
 			bool unlocked = !caret.IsLocked();
 			menu.Add(unlocked,
-				t_("Block"),
-				[=] { caret.Block(caret.IsBlinking()); })
+				t_("Блок"),
+				[=, this] { caret.Block(caret.IsBlinking()); })
 				.Radio(cstyle == Caret::BLOCK);
 			menu.Add(unlocked,
-				t_("Beam"),
-				[=] { caret.Beam(caret.IsBlinking()); })
+				t_("Луч"),
+				[=, this] { caret.Beam(caret.IsBlinking()); })
 				.Radio(cstyle == Caret::BEAM);
 			menu.Add(unlocked,
-				t_("Underline"),
-				[=] { caret.Underline(caret.IsBlinking()); })
+				t_("Подчерк"),
+				[=, this] { caret.Underline(caret.IsBlinking()); })
 				.Radio(cstyle == Caret::UNDERLINE);
 			menu.Separator();
 			menu.Add(unlocked,
-				t_("Blinking"),
-				[=] { caret.Blink(!caret.IsBlinking());	 })
+				t_("Мерцающий"),
+				[=, this] { caret.Blink(!caret.IsBlinking());	 })
 				.Check(caret.IsBlinking());
 			menu.Separator();
-			menu.Add(t_("Locked"),
-				[=] { caret.Lock(!caret.IsLocked()); })
+			menu.Add(t_("Заблокировано"),
+				[=, this] { caret.Lock(!caret.IsLocked()); })
 				.Check(!unlocked);
 		});
 	menu.Separator();
-	menu.Add(t_("Scrollbar"),
-		[=] { ShowScrollBar(!sb.IsChild()); })
+	menu.Add(t_("Полоса промотки"),
+		[=, this] { ShowScrollBar(!sb.IsChild()); })
 		.Key(K_SHIFT_CTRL_S)
 		.Check(sb.IsChild());
-	menu.Add(t_("Auto-hide mouse cursor"),
-		[=] { AutoHideMouseCursor(!hidemousecursor); })
+	menu.Add(t_("Скрывать автоматически курсор мыши"),
+		[=, this] { AutoHideMouseCursor(!hidemousecursor); })
 		.Key(K_SHIFT_CTRL_M)
 		.Check((hidemousecursor));
 	menu.Add(t_("Alternate scroll"),
-		[=] { AlternateScroll(!alternatescroll); })
+		[=, this] { AlternateScroll(!alternatescroll); })
 		.Key(K_SHIFT|K_ALT_S)
 		.Check(alternatescroll);
-	menu.Add(t_("Key navigation"),
-		[=] { KeyNavigation(!keynavigation); })
+	menu.Add(t_("Навигация клавишами"),
+		[=, this] { KeyNavigation(!keynavigation); })
 		.Key(K_SHIFT_CTRL_K)
 		.Check(keynavigation);
-	menu.Add(t_("PC-style function keys"),
-		[=] { PCStyleFunctionKeys(!pcstylefunctionkeys); })
+	menu.Add(t_("Клавиши Функций в стиле ПК"),
+		[=, this] { PCStyleFunctionKeys(!pcstylefunctionkeys); })
 		.Key(K_SHIFT_CTRL_P)
 		.Check(pcstylefunctionkeys);
-	menu.Add(t_("Dynamic colors"),
-		[=] { DynamicColors(!dynamiccolors); })
+	menu.Add(t_("Динамические цвета"),
+		[=, this] { DynamicColors(!dynamiccolors); })
 		.Key(K_SHIFT_CTRL_D)
 		.Check(dynamiccolors);
-	menu.Add(t_("Light colors"),
-		[=] { LightColors(!lightcolors); })
+	menu.Add(t_("Светлые цвета"),
+		[=, this] { LightColors(!lightcolors); })
 		.Key(K_SHIFT|K_ALT_L)
 		.Check(lightcolors);
-	menu.Add(t_("Adjust to dark themes"),
-		[=] { AdjustColors(!adjustcolors); })
+	menu.Add(t_("Отрегулировать под тёмные темы"),
+		[=, this] { AdjustColors(!adjustcolors); })
 		.Key(K_SHIFT|K_ALT_D)
 		.Check(adjustcolors);
-	menu.Add(t_("Blinking text"),
-		[=] { BlinkingText(!blinkingtext); })
+	menu.Add(t_("Мерцающий текст"),
+		[=, this] { BlinkingText(!blinkingtext); })
 		.Key(K_SHIFT_CTRL_B)
 		.Check(blinkingtext);
-	menu.Add(t_("Hyperlinks"),
-		[=] { Hyperlinks(!hyperlinks); })
+	menu.Add(t_("Гиперссылки"),
+		[=, this] { Hyperlinks(!hyperlinks); })
 		.Key(K_SHIFT|K_ALT_H)
 		.Check(hyperlinks);
-	menu.Add(t_("Inline images"),
-		[=] { InlineImages(!inlineimages); })
+	menu.Add(t_("Инлайнить рисункиs"),
+		[=, this] { InlineImages(!inlineimages); })
 		.Key(K_SHIFT_CTRL_I)
 		.Check(inlineimages);
-	menu.Add(t_("Size hint"),
-		[=] { ShowSizeHint(!sizehint); })
+	menu.Add(t_("Показывать размер"),
+		[=, this] { ShowSizeHint(!sizehint); })
 		.Key(K_SHIFT_CTRL_W)
 		.Check(sizehint);
 	menu.Add(t_("Buffered refresh"),
-		[=] { DelayedRefresh(!delayedrefresh); })
+		[=, this] { DelayedRefresh(!delayedrefresh); })
 		.Key(K_SHIFT_CTRL_Z)
 		.Check(delayedrefresh);
 	menu.Add(t_("Lazy resize"),
-		[=] { LazyResize(!lazyresize); })
+		[=, this] { LazyResize(!lazyresize); })
 		.Key(K_SHIFT_CTRL_Y)
 		.Check(lazyresize);
 }

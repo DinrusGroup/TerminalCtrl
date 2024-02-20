@@ -17,24 +17,24 @@ const char *tshell = "ComSpec"; // Alternatively you can use powershell...
 
 TerminalExample::TerminalExample()
 {
-	CtrlLayout(*this, "Terminal Layout Example");
+	CtrlLayout(*this, "Пример с Выкладкой Терминала");
 #ifdef PLATFORM_COCOA	// MacOS menubar fix.
 	SetMainMenu([=](Bar& bar) { MainMenu(bar); });
 #else
 	AddFrame(mainmenu);
 #endif
-	mainmenu.Set([=](Bar& bar) { MainMenu(bar); });
+	mainmenu.Set([=, this](Bar& bar) { MainMenu(bar); });
 	Sizeable().Zoomable().SetRect(AddFrameSize(term.GetStdSize()));
-	term.WhenBell                 = [=]()                { BeepExclamation(); };
-	term.WhenBar                  = [=](Bar& bar)        { ContextMenu(bar);  };
-	term.WhenTitle                = [=](String s)        { Title(s);          };
-	term.WhenOutput               = [=](String s)        { pty.Write(s);      };
-	term.WhenResize               = [=]()                { pty.SetSize(term.GetPageSize()); };
-	term.WhenLink                 = [=](const String& s) { PromptOK(DeQtf(s));              };
-	term.WhenWindowMinimize       = [=](bool b)          { WindowAction(WindowOp::Minimize, b);   };
-	term.WhenWindowMaximize       = [=](bool b)          { WindowAction(WindowOp::Maximize, b);   };
-	term.WhenWindowFullScreen     = [=](int i)           { WindowAction(WindowOp::FullScreen, i); };
-	term.WhenWindowGeometryChange = [=](Rect r)          { WindowAction(WindowOp::Geometry, r);   };
+	term.WhenBell                 = [=, this]()                { BeepExclamation(); };
+	term.WhenBar                  = [=, this](Bar& bar)        { ContextMenu(bar);  };
+	term.WhenTitle                = [=, this](String s)        { Title(s);          };
+	term.WhenOutput               = [=, this](String s)        { pty.Write(s);      };
+	term.WhenResize               = [=, this]()                { pty.SetSize(term.GetPageSize()); };
+	term.WhenLink                 = [=, this](const String& s) { PromptOK(DeQtf(s));              };
+	term.WhenWindowMinimize       = [=, this](bool b)          { WindowAction(WindowOp::Minimize, b);   };
+	term.WhenWindowMaximize       = [=, this](bool b)          { WindowAction(WindowOp::Maximize, b);   };
+	term.WhenWindowFullScreen     = [=, this](int i)           { WindowAction(WindowOp::FullScreen, i); };
+	term.WhenWindowGeometryChange = [=, this](Rect r)          { WindowAction(WindowOp::Geometry, r);   };
 }
 
 void TerminalExample::Serialize(Stream& s)
@@ -49,9 +49,9 @@ void TerminalExample::About()
 {
 	String txt;
 	txt << "-----------------------------------\r\n"
-		<< "# A terminal gui building example #\r\n"
-		<< "# Using \033]8;;https://www.ultimatepp.org\033\\"
-		<< "\033[1;36mUltimate++\033[m\033]8;;\033\\ technology!    #\r\n"
+		<< "# Пример построения терминала с ГИП, #\r\n"
+		<< "# Используя \033]8;;https://www.ultimatepp.org\033\\"
+		<< "\033[1;36mUltimate++\033[m\033]8;;\033\\ технологию!    #\r\n"
 		<< "-----------------------------------\r\n";
 	term.Echo(txt);
 }
@@ -108,64 +108,64 @@ void TerminalExample::WindowAction(WindowOp action, Value arg)
 
 void TerminalExample::MainMenu(Bar& bar)
 {
-	bar.Sub(t_("File"), [=](Bar& bar)    { FileMenu(bar); });
-	bar.Sub(t_("Edit"), [=](Bar& bar)    { term.EditBar(bar); });
-	bar.Sub(t_("View"), [=](Bar& bar)    { ViewMenu(bar); });
-	bar.Sub(t_("Options"), [=](Bar& bar) { term.OptionsBar(bar); });
+	bar.Sub(t_("Файл"), [=, this](Bar& bar)    { FileMenu(bar); });
+	bar.Sub(t_("Правка"), [=, this](Bar& bar)    { term.EditBar(bar); });
+	bar.Sub(t_("Вид"), [=, this](Bar& bar)    { ViewMenu(bar); });
+	bar.Sub(t_("Опции"), [=, this](Bar& bar) { term.OptionsBar(bar); });
 }
 
 void TerminalExample::FileMenu(Bar& bar)
 {
-	bar.Add(t_("Exit"), [=] { Close(); });
+	bar.Add(t_("Выход"), [=, this] { Close(); });
 }
 
 void TerminalExample::ViewMenu(Bar& bar)
 {
 	// Custom menu to define and toggle custom terminal display sizes.
 
-	bar.Add(t_("Toggle full screen"),
-		[=]{ WindowAction(WindowOp::FullScreen, 0); })
+	bar.Add(t_("Переключиться в полноэкранный режим"),
+		[=, this]{ WindowAction(WindowOp::FullScreen, 0); })
 		.Key(K_SHIFT_CTRL_F7)
 		.Check(IsFullScreen());
-	bar.Add(t_("Maximize window"),
-		[=]{ WindowAction(WindowOp::Maximize); })
+	bar.Add(t_("Развернуть окно"),
+		[=, this]{ WindowAction(WindowOp::Maximize); })
 		.Key(K_SHIFT_CTRL_F6)
 		.Check(IsMaximized());
-	bar.Add(t_("Minimize window"),
-		[=]{ WindowAction(WindowOp::Minimize); })
+	bar.Add(t_("Свернуть окно"),
+		[=, this]{ WindowAction(WindowOp::Minimize); })
 		.Key(K_SHIFT_CTRL_F5)
 		.Check(IsMinimized());
 	bar.Separator();
 	bar.Add("80 x 24",
-		[=]{ WindowAction(WindowOp::Resize, term.PageSizeToClient(80, 24));  })
+		[=, this]{ WindowAction(WindowOp::Resize, term.PageSizeToClient(80, 24));  })
 		.Key(K_SHIFT_CTRL_F1);
 	bar.Add("80 x 48",
-		[=]{ WindowAction(WindowOp::Resize, term.PageSizeToClient(80, 48));  })
+		[=, this]{ WindowAction(WindowOp::Resize, term.PageSizeToClient(80, 48));  })
 		.Key(K_SHIFT_CTRL_F2);
 	bar.Add("132 x 24",
-		[=]{ WindowAction(WindowOp::Resize, term.PageSizeToClient(132, 24)); })
+		[=, this]{ WindowAction(WindowOp::Resize, term.PageSizeToClient(132, 24)); })
 		.Key(K_SHIFT_CTRL_F3);
 	bar.Add("132 x 48",
-		[=]{ WindowAction(WindowOp::Resize, term.PageSizeToClient(132, 48)); })
+		[=, this]{ WindowAction(WindowOp::Resize, term.PageSizeToClient(132, 48)); })
 		.Key(K_SHIFT_CTRL_F4);
 
 	// Only keys...
-	bar.AddKey(K_SHIFT|K_CTRL|K_ADD,	  [=] { FontZoom(1);     });
-	bar.AddKey(K_SHIFT|K_CTRL|K_SUBTRACT, [=] { FontZoom(-1);    });
-	bar.AddKey(K_SHIFT|K_CTRL|K_MULTIPLY, [=] { FontZoom(0);     });
-	bar.AddKey(K_SHIFT|K_ALT|K_ADD,	      [=] { LineSpacing(1);  });
-	bar.AddKey(K_SHIFT|K_ALT|K_SUBTRACT,  [=] { LineSpacing(-1); });
-	bar.AddKey(K_SHIFT|K_ALT|K_MULTIPLY,  [=] { LineSpacing(0);  });
+	bar.AddKey(K_SHIFT|K_CTRL|K_ADD,	  [=, this] { FontZoom(1);     });
+	bar.AddKey(K_SHIFT|K_CTRL|K_SUBTRACT, [=, this] { FontZoom(-1);    });
+	bar.AddKey(K_SHIFT|K_CTRL|K_MULTIPLY, [=, this] { FontZoom(0);     });
+	bar.AddKey(K_SHIFT|K_ALT|K_ADD,	      [=, this] { LineSpacing(1);  });
+	bar.AddKey(K_SHIFT|K_ALT|K_SUBTRACT,  [=, this] { LineSpacing(-1); });
+	bar.AddKey(K_SHIFT|K_ALT|K_MULTIPLY,  [=, this] { LineSpacing(0);  });
 }
 
 void TerminalExample::ContextMenu(Bar& bar)
 {
 	// Prepends the custom view menu to TerminalCtrl's standard menu.
 
-	bar.Sub(t_("View"), [=](Bar& bar) { ViewMenu(bar); });
+	bar.Sub(t_("Вид"), [=, this](Bar& bar) { ViewMenu(bar); });
 	bar.Separator();
 	term.StdBar(bar);
-	bar.AddKey(K_SHIFT_CTRL_INSERT, [=]{ InsertCodePoint(); });
+	bar.AddKey(K_SHIFT_CTRL_INSERT, [=, this]{ InsertCodePoint(); });
 }
 
 void TerminalExample::FontZoom(int n)

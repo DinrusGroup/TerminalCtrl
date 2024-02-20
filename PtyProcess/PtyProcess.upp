@@ -1,4 +1,4 @@
-description "A cross-platform pseudo-terminal process implementation for U++\377";
+description "Кросплатформная реализация процесса псевдотерминала\377";
 
 uses
 	Core;

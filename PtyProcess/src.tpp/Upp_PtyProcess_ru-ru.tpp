@@ -24,90 +24,107 @@ ic][3 _][*@3;3 AProcess]&]
 ]_[* ConvertCharset]([@(0.0.255) bool]_[*@3 b]_`=_[@(0.0.255) true])&]
 [s5;:Upp`:`:PtyProcess`:`:NoConvertCharset`(`): [_^Upp`:`:PtyProcess^ PtyProcess][@(0.0.255) `&
 ]_[* NoConvertCharset]()&]
-[s2;%RU-RU Determines if PtyProcess should convert encoding from 
-system to the pseudo`-terminal. Default setting is false.&]
+[s2;%RU-RU Определяет, требуется ли преобразование
+ кодировки из системной в кодировку 
+псевдотерминала. Дефолтная установка 
+`- нет (false).&]
 [s3; &]
 [s4; &]
 [s5;:Upp`:`:PtyProcess`:`:SetSize`(Upp`:`:Size`): [@(0.0.255) bool]_[* SetSize]([_^Upp`:`:Size^ S
 ize]_[*@3 sz])&]
 [s5;:Upp`:`:PtyProcess`:`:SetSize`(int`,int`): [@(0.0.255) bool]_[* SetSize]([@(0.0.255) in
 t]_[*@3 col], [@(0.0.255) int]_[*@3 row])&]
-[s2;%RU-RU Setst the page size of the active pty. Returns true on 
-success.&]
+[s2;%RU-RU Устанавливает размер страницы 
+активного pty. При успехе операции 
+возвращает true.&]
 [s3;%RU-RU &]
 [s4; &]
 [s5;:Upp`:`:PtyProcess`:`:GetSize`(`): [_^Upp`:`:Size^ Size]_[* GetSize]()&]
-[s2;%RU-RU Returns the page size of the active pty on success and 
-Null on failure.&]
+[s2;%RU-RU При успехе возвращает размер 
+страницы активного pty и Null `- при неудаче.&]
 [s3; &]
 [s4; &]
 [s5;:Upp`:`:PtyProcess`:`:SetAttrs`(const termios`&`): [@(0.0.255) bool]_[* SetAttrs]([@(0.0.255) c
 onst]_[_^termios^ termios][@(0.0.255) `&]_[*@3 t])&]
-[s6; POSIX specific.&]
-[s2;%RU-RU Sets the attributes of the active pty to [%-*@3 t]. Returns 
-true on success.&]
+[s6; Специфика POSIX.&]
+[s2;%RU-RU Устанавливает атрибуты активного 
+pty в [%-*@3 t]. При успехе операции возвращает 
+true.&]
 [s3;%RU-RU &]
 [s4; &]
 [s5;:Upp`:`:PtyProcess`:`:GetAttrs`(termios`&`): [@(0.0.255) bool]_[* GetAttrs]([_^termios^ t
 ermios][@(0.0.255) `&]_[*@3 t])&]
-[s6; POSIX specific.&]
-[s2;%RU-RU Fetches the attributes of the active pty into [%-*@3 t]. 
-Return true on success.&]
+[s6; Специфика POSIX.&]
+[s2;%RU-RU Выводит атрибуты активного pty 
+в [%-*@3 t]. При успехе операции возвращает 
+true.&]
 [s3;%RU-RU &]
 [s4; &]
 [s5;:Upp`:`:PtyProcess`:`:WhenAttrs: [_^Upp`:`:Gate^ Gate]<termios[@(0.0.255) `&]>_[* WhenA
 ttrs]&]
-[s6;%RU-RU POSIX specific&]
-[s2;%RU-RU This event can be used to set or change the [/ initial attributes] 
-of the pty. Returning true will set the attributes, and returning 
-false will cancel the operation.&]
+[s6;%RU-RU [%- Специфика ]POSIX&]
+[s2;%RU-RU Это событие может использоваться 
+для установки или изменения [/ начальных 
+атрибутов] pty. При возврате true атрибуты 
+установились, а при возврате false операция 
+будет отменена.&]
 [s3; &]
 [s4; &]
 [s5;:Upp`:`:PtyProcess`:`:Start`(const char`*`,const char`*`,const char`*`): [@(0.0.255) b
 ool]_[* Start]([@(0.0.255) const]_[@(0.0.255) char]_`*[*@3 cmdline], 
 [@(0.0.255) const]_[@(0.0.255) char]_`*[*@3 env]_`=_nullptr, [@(0.0.255) const]_[@(0.0.255) c
 har]_`*[*@3 cd]_`=_nullptr)&]
-[s2;# [@N Starts a new pseudo`-terminal process defined by ][*@3 cmdline][@N . 
-][*@3 env ][@N can provide a new environment for the process. The 
-new proces will inherit the caller`'s environment if the ][*@3 env 
-][@N argument is NULL. Additionally, o][%RU-RU n POSIX systems ][@N if 
-the ][*@3 env ][%RU-RU argument doesn`'t contain a `"][%RU-RUC TERM][%RU-RU `" 
-key, then the `"][%RU-RUC TERM`=xterm][%RU-RU `" key/value pair will 
-be used as a fallback.. ][*@3 cd ][@N can be used to specify the 
-new current directory for the process.]&]
-[s3;%RU-RU &]
+[s2; Запускает новый процесс псевдотерминала, 
+заданный командной строкой[@N  ][*@3 cmdline.][@N  
+][*@3 env ]может предоставлять процессу 
+новую среду. Если аргумент[@N  ][*@3 env ]равен 
+NULL, новый процесс наследует среду 
+вызывающего процесса. Дополнительно, 
+на системах POSIX, если аргумент env не 
+содержит ключа `"TERM`", тогда используется 
+пара ключ`-значение `"TERM`=xterm`" as a fallback. 
+[*@3 cd] можно использовать, чтобы указать 
+новую текущую папку для процесса.&]
+[s2; &]
 [s4; &]
 [s5;:Upp`:`:PtyProcess`:`:Start`(const char`*`,const Upp`:`:Vector`<Upp`:`:String`>`*`,const char`*`,const char`*`): [@(0.0.255) b
 ool]_[* Start]([@(0.0.255) const]_[@(0.0.255) char]_`*[*@3 cmd], [@(0.0.255) const]_[_^Upp`:`:Vector^ V
 ector]<[_^Upp`:`:String^ String]>_`*[*@3 args], [@(0.0.255) const]_[@(0.0.255) char]_`*[*@3 e
 nv]_`=_nullptr, [@(0.0.255) const]_[@(0.0.255) char]_`*[*@3 cd]_`=_nullptr)&]
-[s2;%RU-RU Starts a new pseudo`-terminal process defined by [%-*@3 cmd] 
-and [%-*@3 args]. [%-*@3 env] can provide a new environment for the 
-process. [%-@N The new proces will inherit the caller`'s environment 
-if the ][%-*@3 env ][%-@N argument is NULL. Additionally, o]n POSIX 
-systems [%-@N if the ][%-*@3 env ]argument doesn`'t contain a `"[C TERM]`" 
-key, then the `"[C TERM`=xterm]`" key/value pair will be used as 
-a fallback. This variant passes individual arguments instead 
-of whole commandline. On POSIX this has the advantage of passing 
-the commands directly to execv, without parsing the command line. 
-[%-*@3 cd] can be used to specify the new current directory for 
-the process.&]
+[s2;%RU-RU Запускает новый процесс псевдотерминала
+,  определёееый строкой [%-*@3 cmd] и аргументами 
+[%-*@3 args]. [%-*@3 env] может обеспечить процесс 
+новой средой выполнения. Этот новый 
+процесс наследует среду вызываемого, 
+если аргумент env равен NULL. В дополнение, 
+на системах POSIX, если аргумент[%-@N  ][%-*@3 env 
+][%- не содержит ключа] `"[C TERM]`", то используется 
+пара ключ`-значение `"[C TERM`=xterm]`" . Этот 
+вариант передаёт индивидуальные 
+аргументы вместо всей командной строки. 
+На POSIX команды прямо передаются функции 
+execv, без парсинга командной строки. 
+[%-*@3 cd]  может использоваться для определения 
+новой рабочей директории процесса.&]
 [s3;%RU-RU &]
 [s4; &]
 [s5;:Upp`:`:PtyProcess`:`:Start`(const char`*`,const Upp`:`:VectorMap`<Upp`:`:String`,Upp`:`:String`>`&`,const char`*`): [@(0.0.255) b
 ool]_[* Start]([@(0.0.255) const]_[@(0.0.255) char]_`*[*@3 cmdline], 
 [@(0.0.255) const]_[_^Upp`:`:VectorMap^ VectorMap]<[_^Upp`:`:String^ String], 
 [_^Upp`:`:String^ String]>`&_[*@3 env], [@(0.0.255) const]_[@(0.0.255) char]_`*[*@3 cd])&]
-[s2; [%RU-RU Start a new pseudo terminal process defined by ][*@3 cmdline][%RU-RU . 
-][*@3 env][%RU-RU  is a map of key/value pairs that can provide a 
-new environment for the process. On POSIX systems if the ][*@3 env][%RU-RU  
-argument doesn`'t contain a `"][%RU-RUC TERM][%RU-RU `" key, then 
-the `"][%RU-RUC TERM`=xterm][%RU-RU `" key/value pair will be used 
-as a fallback. ][*@3 cd][%RU-RU  ][@N can be used to specify the new 
-current directory for the process.]&]
-[s3; &]
+[s2;%RU-RU Запускает новый процесс псевдотерминала
+, который описывается в строке [%-*@3 cmdline]. 
+[%-*@3 env] представляет мап пар ключ`-значение, 
+который может обеспечивать процесс 
+новой средой. На системах POSIX, если 
+аргумент [%-*@3 env] не содержит ключа `"[C TERM]`", 
+будет использоваться пара ключ`-значение 
+`"[C TERM`=xterm]`". [%-*@3 cd] может использоваться 
+для определения новой рабочей директории 
+процесса.&]
+[s3;%RU-RU &]
 [ {{10000F(128)G(128)@1 [s0;%RU-RU [* Детали конструктора]]}}&]
-[s3; &]
+[s4; &]
 [s5;:Upp`:`:PtyProcess`:`:PtyProcess`(`): [* PtyProcess]()&]
 [s2;%RU-RU Дефолтный конструктор.&]
 [s3; &]
@@ -116,21 +133,24 @@ current directory for the process.]&]
 tyProcess]([@(0.0.255) const]_[@(0.0.255) char]_`*[*@3 cmdline], [@(0.0.255) const]_[_^Upp`:`:VectorMap^ V
 ectorMap]<[_^Upp`:`:String^ String], [_^Upp`:`:String^ String]>`&_[*@3 env], 
 [@(0.0.255) const]_[@(0.0.255) char]_`*[*@3 cd]_`=_nullptr)&]
-[s2;%RU-RU  Equivalent of default constructor and then invoking Start([%-*@3 cmdline], 
-[%-*@3 env], [%-*@3 cd]).&]
+[s2;%RU-RU  Эквивалент дефолтного конструктора, 
+далее вызывающий Start([%-*@3 cmdline], [%-*@3 env], 
+[%-*@3 cd]).&]
 [s3;%RU-RU &]
 [s4; &]
 [s5;:Upp`:`:PtyProcess`:`:PtyProcess`(const char`*`,const char`*`,const char`*`): [* Pt
 yProcess]([@(0.0.255) const]_[@(0.0.255) char]_`*[*@3 cmdline], [@(0.0.255) const]_[@(0.0.255) c
 har]_`*[*@3 env]_`=_nullptr, [@(0.0.255) const]_[@(0.0.255) char]_`*[*@3 cd]_`=_nullptr)&]
-[s2;%RU-RU Equivalent of default constructor and then invoking Start([%-*@3 cmdline], 
-[%-*@3 env], [%-*@3 cd]).&]
+[s2;%RU-RU Эквивалент дефолтного конструктора, 
+далее вызывающий Start([%-*@3 cmdline], [%-*@3 env], 
+[%-*@3 cd]).&]
 [s3;%RU-RU &]
 [s4; &]
 [s5;:Upp`:`:PtyProcess`:`:PtyProcess`(const char`*`,const Upp`:`:Vector`<Upp`:`:String`>`*`,const char`*`,const char`*`): [* P
 tyProcess]([@(0.0.255) const]_[@(0.0.255) char]_`*[*@3 cmd], [@(0.0.255) const]_[_^Upp`:`:Vector^ V
 ector]<[_^Upp`:`:String^ String]>_`*[*@3 args], [@(0.0.255) const]_[@(0.0.255) char]_`*[*@3 e
 nv]_`=_nullptr, [@(0.0.255) const]_[@(0.0.255) char]_`*[*@3 cd]_`=_nullptr)&]
-[s2;%RU-RU Equivalent of default constructor and then invoking Start([%-*@3 cmd], 
-[%-*@3 args], [%-*@3 env], [%-*@3 cd]).&]
+[s2;%RU-RU Эквивалент дефолтного конструктора, 
+далее вызывающий Start([%-*@3 cmd], [%-*@3 args], 
+[%-*@3 env], [%-*@3 cd]).&]
 [s3; ]]

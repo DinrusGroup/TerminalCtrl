@@ -23,60 +23,84 @@ topic "Specifications";
 [H8;b73;*+150 $$22,5#07864147445237544204111237153677:subtitle]
 [2 $$0,0#00000000000000000000000000000000:Default]
 [{_}%EN-US 
-[s2;= Terminal Package for U`+`+&]
+[s2;= Пакет Terminal для U`+`+/DinrusIDE&]
 [s0;= [*1 Copyright © 2019`-2021, ][*^https`:`/`/github`.com`/ismail`-yilmaz^1 İsmail 
 Yılmaz]&]
 [s2; &]
-[s2;= Technical Specifications&]
+[s2;= Технические Характеристики&]
 [s5; This document is in progress (being written..).&]
-[s22;%- Table of contents&]
+[s22;%- Содержание&]
 [s0;%- &]
 [s0; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#SupportedEmulationLevels^ 1
- Supported Emulation Levels]&]
+ Поддерживаемые Уровни Эмуляции]&]
 [s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#Terminal`:`:IOModes^ 2
- Supported I/O Modes and Parser Capabilities]&]
+ Поддерживаемые Ражимы I/O и Возможности 
+Парсера]&]
 [s0; 3 Supported Legacy Charset Sequences&]
 [s0; 4 Supported Keyboard Sequences&]
 [s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#TerminalCTL^ 5 
-Supported Control Bytes]&]
+][^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#SupportedEmulationLevels^ П
+оддерживаемые ][^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#TerminalCTL^ C
+ontrol Bytes]&]
 [s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#TerminalModes^ 6 
-Supported Terminal Modes]&]
+][^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#SupportedEmulationLevels^ П
+оддерживаемые ][^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#TerminalModes^ T
+erminal Modes]&]
 [s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#TerminalESC^ 7 
-Supported Escape Sequences]&]
+][^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#SupportedEmulationLevels^ П
+оддерживаемые ][^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#TerminalESC^ E
+scape Sequences]&]
 [s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#TerminalCSI^ 8 
-Supported Command Sequences]&]
+][^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#SupportedEmulationLevels^ П
+оддерживаемые ][^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#TerminalCSI^ C
+ommand Sequences]&]
 [s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#TerminalDCS^ 9 
-Supported Device Control Strings]&]
+][^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#SupportedEmulationLevels^ П
+оддерживаемые ][^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#TerminalDCS^ D
+evice Control Strings]&]
 [s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#TerminalOSC^ 10 
-Supported Operating System Commands]&]
+][^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#SupportedEmulationLevels^ П
+оддерживаемые ][^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#TerminalOSC^ O
+perating System Commands]&]
 [s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#TerminalSGR^ 11 
-Supported Graphics Rendition Opcodes]&]
+][^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#SupportedEmulationLevels^ П
+оддерживаемые ][^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#TerminalSGR^ G
+raphics Rendition Opcodes]&]
 [s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#TerminalExtendedColorSequences^ 1
-2 Supported Extended Color Sequences]&]
+2 ][^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#SupportedEmulationLevels^ П
+оддерживаемые ][^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#TerminalExtendedColorSequences^ E
+xtended Color Sequences]&]
 [s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#ColorTextSpecifications^ 1
-3 Supported Color Text Specifications]&]
+3 ][^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#SupportedEmulationLevels^ П
+оддерживаемые ][^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#ColorTextSpecifications^ C
+olor Text Specifications]&]
 [s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#ExtenedInlineImageSequences^ 1
-4 Supported Extended Inline Images Sequences]&]
+4 ][^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#SupportedEmulationLevels^ П
+оддерживаемые ][^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#ExtenedInlineImageSequences^ E
+xtended Inline Images Sequences]&]
 [s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#WindowActionAndReport^ 1
-5 Supported Window Report and Action Sequences]&]
+5 ][^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#SupportedEmulationLevels^ П
+оддерживаемые ][^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#WindowActionAndReport^ W
+indow Report and Action Sequences]&]
 [s0;i150;O9; [^topic`:`/`/Terminal`/srcdoc`/Terminal`_Spec`_ru`-ru`#TerminalOtherExt^ 1
 6 Other Supported Extensions]&]
 [s0; 15. Further Reading&]
 [s0; 16. Acknowledgements&]
 [s2; &]
-[ {{957:9043h40;@(165)-1 [s0;=:SupportedEmulationLevels: [* Supported Emulation Levels]]
+[ {{873:9127h40;@(165)-1 [s0;=:SupportedEmulationLevels: [* Поддерживаемые Уровни 
+Эмуляции]]
 ::@2 [s0;%- ]
 :: [s0;= [*@3 0]]
-:: [s0; VT 52 emulation.]
+:: [s0; Эмуляция VT 52.]
 :: [s0;= [*@3 1]]
-:: [s0; VT 1xx emulation.]
+:: [s0; Эмуляция VT 1xx.]
 :: [s0;= [*@3 2]]
-:: [s0; VT 2xx emulation]
+:: [s0; Эмуляция VT 2xx]
 :: [s0;= [*@3 3]]
-:: [s0; VT 3xx emulation.]
+:: [s0; Эмуляция VT 3xx.]
 :: [s0;= [*@3 4]]
-:: [s0; VT 4xx emulation]
-::@7-1 [s0;= [*C Notes]]
+:: [s0; Эмуляция VT 4xx]
+::@7-1 [s0;= [*C Заметки]]
 ::@2 [s0;%- ]
 ::-1 [s19;%- &]
 [s6;#r442;i150;O0;~~~288;%- In reality, there is no such conformance 

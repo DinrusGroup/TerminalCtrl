@@ -1,14 +1,14 @@
-# PtyProcess package for U++
+# Пакет PtyProcess для U++/DinrusIDE
 
-A cross-platform pseudoconsole inplementation for U++.
+Кроссплатформная реализация псевдоконсоли для U++/DinrusIDE.
 
-## Introduction
+## Введение
 
-This package provides a unified and simple interface for both POSIX-compliant systems and Windows platforms. On Windows, PtyProcess package can use two backends:
+Этот пакет предоставляет унифицированный и простой интерфейс как для совместимых с POSIX систем, так и для платформ Windows. На Windows, пакет PtyProcess может использовать два бэкэнда:
 
-1.  Statically linked [winpty library and agent](https://github.com/rprichard/winpty). This library allows `PtyProcess` to run native console applications on Windows XP/Vista/7/8/10. You will also need to compile the `PtyAgent` package. This is the **default** backend. 
+1.  Статически скомпонованную [библиотеку winpty и агента](https://github.com/rprichard/winpty). Эта библиотека позволяет `PtyProcess` запускать нативные консольные приложения на Windows XP/Vista/7/8/10/11. Дополнительно потребуется скомпилировать пакет `PtyAgent`. Это **дефолтный** бэкэнд. 
 
-2.  Native Windows 10 pseudoconsole API (ConEmu). This backend requires at least Windows 10 with pty support and it can be switched on via the `WIN10` build flag.
+2.  Нативную псевдоконсоль Windows 10 API (ConEmu). Для этого бэкэнда требуется как минимум Windows 10 с поддержкой pty, и переключиться на него можно через флаг построения `WIN10`.
 
 ## License
 

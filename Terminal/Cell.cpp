@@ -170,7 +170,8 @@ static const Vector<Tuple<dword, dword>> sDoubleWidthChars = {
    { 0x1FAD0, 0x1FAD6 }, { 0x20000, 0x2FFFD }, { 0x30000, 0x3FFFD }
 };
 
-// TODO:
+// TODO: 
+//СДЕЛАТЬ:
 // static const Vector<Tuple<dword, dword>> sAmbiguousWidthChars
 // static const Vector<Tuple<dword, dword>> sUnknownWidthChars
 

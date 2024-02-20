@@ -5,7 +5,7 @@ enum_property CaretStyle {
 };
 
 ctrl TerminalCtrl {
-	group "Complex";
+	group "Комплекс";
 
 
 	Frame      SetFrame        = FieldFrame() @1;

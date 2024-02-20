@@ -94,7 +94,7 @@ void TerminalCtrl::ParseiTerm2Graphics(const VTInStream::Sequence& seq)
 	|| (pos = ToLower(options).FindAfter("file=")) < 0 || IsNull(enc))
 		return;
 
-	auto GetVal = [=](const String& s, int p, int f) -> int
+	auto GetVal = [=, this](const String& s, int p, int f) -> int
 	{
 		int n = ReadInt(s, 0);
 		if(!n)

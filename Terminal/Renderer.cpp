@@ -319,13 +319,13 @@ int TerminalCtrl::InlineImageMaker::Make(InlineImage& imagedata) const
 {
 	LTIMING("TerminalCtrl::ImageDataMaker::Make");
 
-	auto ToCellSize = [=](Sizef sz) -> Size
+	auto ToCellSize = [=, this](Sizef sz) -> Size
 	{
 		sz = sz / Sizef(fontsize);
 		return Size(fround(sz.cx), fround(sz.cy));
 	};
 
-	auto AdjustSize = [=](Size sr, Size sz) -> Size
+	auto AdjustSize = [=, this](Size sr, Size sz) -> Size
 	{
 		if(imgs.keepratio) {
 			if(sr.cx == 0 && sr.cy > 0)
